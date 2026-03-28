@@ -2,9 +2,23 @@
 import './App.css'
 import Counter from './Counter';
 import Batsman from './Batsman';
-import Users from './Users';
+import Users from './Users';  
+import Friends from './Friends';
+ 
+import { Suspense } from 'react';
+
+const fetchUsers = fetch('https://jsonplaceholder.typicode.com/users')
+.then(res => res.json())
+ 
+const fetchFriends = async () => {
+  const res = await fetch('https://jsonplaceholder.typicode.com/users');
+  return res.json();
+}
+
 
 function App() {
+
+const friendsPromise = fetchFriends();
 
 function handleClick() {
   alert('Button clicked!');
@@ -24,7 +38,13 @@ const handleAdd5= (num) => {
        
         <div className="hero">
              <h1>Get started</h1>
-              <Users></Users>
+           {/* <Suspense fallback={<h2>Loading...</h2>}>
+             <Users fetchUsers={fetchUsers}></Users>
+           </Suspense> */}
+
+           <Suspense fallback={<h2>Friends are coming for treat...</h2>}>
+              <Friends friendsPromise={friendsPromise} ></Friends>
+           </Suspense>
               
             <Batsman></Batsman>
             <Counter></Counter>
