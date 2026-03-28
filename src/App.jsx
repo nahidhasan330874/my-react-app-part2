@@ -2,6 +2,7 @@
 import './App.css'
 import Counter from './Counter';
 import Batsman from './Batsman';
+import Users from './Users';
 
 function App() {
 
@@ -23,7 +24,8 @@ const handleAdd5= (num) => {
        
         <div className="hero">
              <h1>Get started</h1>
-
+              <Users></Users>
+              
             <Batsman></Batsman>
             <Counter></Counter>
 
